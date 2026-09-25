@@ -17,6 +17,7 @@
 | `README.md`（本文） | 方案概述、测试项目总览、评分体系摘要 |
 | [docs/test-procedures.md](docs/test-procedures.md) | 测试规程与评分细则：通用条件、T01–T15 每项的过程解析与打分依据、附录 |
 | [docs/scoring-sheet.xlsx](docs/scoring-sheet.xlsx) | 打分表（xlsx）：打分汇总（含自动加权与等级公式）、否决项检查、测试结论 |
+| [scripts/](scripts/README.md) | 测试工具脚本（纯标准库）：数据统计、自动判档、阈值换算 |
 
 ## 2. 目的
 
