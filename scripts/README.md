@@ -17,6 +17,10 @@
 | T12 / T13 | `eval_drift.py` | 同 T03 表头，可加 `temp_c`（T13 必填）、`er_rms`（可选） | `--mode t12\|t13` |
 | T14 | `eval_sync.py` | `dt_ms` | — |
 | T10 / T11 / T15 恶化系数 | `eval_kappa.py` | 命令行参数 `--base --values` | `--bands t10\|t11\|t12\|t13\|t15` |
+| T16 | `eval_detection.py` | `segment,outcome,cx_err_px`（outcome ∈ TP/FP/FN，远段含“远”） | — |
+| T17 | `eval_latency.py` | `latency_ms` | `--longrun`（长跑段 CSV） |
+| T18 | `eval_ball_ranging.py` | `dist_gt,dist_meas[,valid]`（m） | `--f --b`（必填） |
+| T19 | `eval_serve_timing.py` | `speed_group,success,timing_err_ms` | `--false-triggers N --scenes N` |
 | 附录 A 阈值表 | `gen_thresholds.py` | — | `--f --b [--dd] [--distances] [--markdown]` |
 
 ## 用法示例
@@ -44,6 +48,10 @@ python3 scripts/eval_drift.py /tmp/t12.csv --mode t12
 
 # 附录 A：按实际设备生成阈值表（Markdown 可直接粘贴进报告）
 python3 scripts/gen_thresholds.py --f 2400 --b 0.8 --markdown
+
+# T19：发球闭环（含误触发统计）
+printf 'speed_group,success,timing_err_ms\n低速,1,15\n低速,1,-10\n高速,1,28\n高速,0,\n' > /tmp/t19.csv
+python3 scripts/eval_serve_timing.py /tmp/t19.csv --false-triggers 2 --scenes 60
 ```
 
 所有脚本均支持 `--json out.json` 导出机器可读结果（指标、阈值、档位、得分、汇总）。
